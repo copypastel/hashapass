@@ -4,7 +4,7 @@
 # Contact: 
 #    - daicoden@copypastel.com
 #    - ecin@copypastel.com
-VERSION="0.2.1"
+VERSION="0.2.2"
 
 function output_version {
    printf "hashapass %s \n" $VERSION
@@ -108,16 +108,16 @@ then
     printf "%s\n" $result
 else
     echo_off
-    if [ `which pbcopy` ]
+    if which pbcopy &> /dev/null
     then
       printf $result | pbcopy
-    elif [ `which xsel` ]
+    elif which xsel &> /dev/null
     then
-      printf $result | xsel
+      printf $result | xsel -ib
     else
       echo_on
-      echo "xsel or pbcopy not found, can not copy to clipboard."
-      echo "Use -p to print out the password, or modify the script"
+      echo "xsel or pbcopy not found, cannot copy to clipboard."
+      echo "Use -p to print out the password, or modify the script."
       exit
     fi
     echo_on
