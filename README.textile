@@ -1,0 +1,26 @@
+h1. hashapass
+
+h2. about
+
+p. hashapass.sh is meant to be a command-line version of "hashapass.com":http://hashapass.com. There's an "article":http://copypastel.com/rofl/Rehashing_Hashapass up at "copypastel.com":http://copypastel.com describing its development and use.
+
+h2. compatibility
+
+p. hashapass.sh has been tested on Mac OS X and Linux. For use on Linux systems, make sure @xsel@ is available.
+
+h2. installing
+
+First, download the repo:
+
+@git clone git@github.com:copypastel/hashapass.git@
+
+Then move @hashapass.sh@ to a directory in your terminal's @PATH@ and make sure it's executable: 
+
+bq. cp hashapass/hashapass.sh /usr/local/bin/hashapass
+chmod +x /usr/local/bin/hashapass
+
+Run @hashapass -h@ for details on using the script itself.
+
+h2. thanks
+
+p. "hashapass.com":http://hashapass.com for the initial idea of a better way to manage passwords. 
