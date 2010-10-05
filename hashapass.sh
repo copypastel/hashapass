@@ -1,10 +1,10 @@
 #!/bin/bash
 # Author: copypastel.com
-# Copyright 2009
+# Copyright 2010
 # Contact: 
 #    - daicoden@copypastel.com
 #    - ecin@copypastel.com
-VERSION="0.2.2"
+VERSION="0.3"
 
 function output_version {
    printf "hashapass %s \n" $VERSION
@@ -23,10 +23,11 @@ function output_help {
   echo "... and you'll be asked for your master password."
   echo
   echo "Usage:"
-  echo "hashapass [-nphv] something_simple"
+  echo "hashapass [-nphv] [-l length] something_simple"
   echo
   echo "Options:"
   echo "-n    Confirm password."
+  echo "-l    Length of password (8 characters by default)."
   echo "-p    Print generated password."
   echo "-h    Displays help message."
   echo "-v    Display version."
@@ -46,7 +47,7 @@ function echo_on {
 function assert_matching {
     if [ $1 != $2 ]
     then
-        printf "Passwords do not match.  Exiting...\n"
+        printf "Passwords do not match. Exiting...\n"
         exit
     fi
 }
@@ -64,12 +65,14 @@ function hash_password() {
     # $1 is the return result
     # $2 is the paramater
     # $3 is the password
-    eval "$1=`printf $2 | openssl dgst -sha1 -hmac $3 -binary | openssl enc -base64 | head -c 8`"
+    # $4 is the password length
+    eval "$1=`printf $2 | openssl dgst -sha1 -hmac $3 -binary | openssl enc -base64 | head -c $4`"
 }
 
 nFlag= # New Flag
 pFlag= # Print Flag
-while getopts 'vhnp' OPTION
+length=8
+while getopts 'vhnpl:' OPTION
 do
     case $OPTION in
     v) # Version
@@ -86,6 +89,9 @@ do
     p) # Print Password
             pFlag=1
             ;;
+    l) # Password length
+            length=$OPTARG
+            ;;
     esac
 done
 # Now all options are removed
@@ -101,7 +107,7 @@ then
     assert_matching $password $password_conf
 fi
 
-hash_password result $paramater $password
+hash_password result $paramater $password $length
 
 if [ "$pFlag" ]
 then
