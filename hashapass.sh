@@ -27,7 +27,7 @@ function output_help {
   echo
   echo "Options:"
   echo "-n    Confirm password."
-  echo "-l    Length of password (8 characters by default)."
+  echo "-l    Length of password (12 characters by default)."
   echo "-p    Print generated password."
   echo "-h    Displays help message."
   echo "-v    Display version."
@@ -71,7 +71,7 @@ function hash_password() {
 
 nFlag= # New Flag
 pFlag= # Print Flag
-length=8
+length=12
 while getopts 'vhnpl:' OPTION
 do
     case $OPTION in
