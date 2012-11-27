@@ -1,0 +1,9 @@
+#compdef hashapass
+
+# Replace 'replace_me' with a space-delimited list of keys
+# you use for hashapass
+# Example:
+# _arguments "1: :(gmail twitter github)"
+#
+# Make sure this file lives somewhere in your $fpath
+_arguments "1: :(replace_me)"
